@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
-const PORT = process.env.PORT || 5000;
+
 
 require('dotenv').config();
 
@@ -44,6 +44,6 @@ app.use(errorMiddleware);
 
 
 // Start server
-app.listen(3001, () => {
-    console.log(`Server is running on port ${3001}`);
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running on port ${process.env.PORT}`);
 });
