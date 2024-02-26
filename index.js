@@ -27,11 +27,31 @@ const corsOptions = {
     origin: '*', // Allow requests from this origin
     methods: 'GET,POST', // Allow only specified methods
     allowedHeaders: 'Content-Type,Authorization',
-    credential: true
+    credential: true    
 };
 
 app.use(cors(corsOptions));
 
+
+
+const getProfile = async () => {
+    console.log("start process");
+    try {
+        const res = await axios.get("https://restapiramji.onrender.com/user/profile", {
+            headers: {
+                "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWRiNTRhNjI4MjFjZWVjZjFiOTZiM2MiLCJpYXQiOjE3MDg5MzYwMzMsImV4cCI6MTcwOTAyMjQzM30.KkubgeQ_N5PEA2NOwPtrHhtyla7Oqo8Nc8bqkh56DV8"
+            }
+        });
+        console.log(res.data);
+        console.log("end process");
+        // Access the response data
+    } catch (err) {
+        console.log("error process");
+        console.error(err); // Log errors
+    }
+}
+
+getProfile();
 
 
 
