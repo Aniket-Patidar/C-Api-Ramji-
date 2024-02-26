@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
+const axios = require('axios');
 
 
 require('dotenv').config();
@@ -31,24 +32,24 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 
-// const getProfile = async () => {
-//     console.log("start process");
-//     try {
-//         const res = await axios.get("https://restapiramji.onrender.com/user/profile", {
-//             headers: {
-//                 "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWQ5NTZiMjFjMDA0OGNlNzA3ZDE5N2UiLCJpYXQiOjE3MDg5MzQyMTgsImV4cCI6MTcwOTAyMDYxOH0.45LAQ41IpP8x8pCjyuI1VMu2B7cSJlp-kQGP8wRFZ3k"
-//             }
-//         });
-//         console.log(res.data);
-//         console.log("end process");
-//         // Access the response data
-//     } catch (err) {
-//         console.log("error process");
-//         console.error(err); // Log errors
-//     }
-// }
+const getProfile = async () => {
+    console.log("start process");
+    try {
+        const res = await axios.get("https://restapiramji.onrender.com/user/profile", {
+            headers: {
+                "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWQ5NTZiMjFjMDA0OGNlNzA3ZDE5N2UiLCJpYXQiOjE3MDg5MzQyMTgsImV4cCI6MTcwOTAyMDYxOH0.45LAQ41IpP8x8pCjyuI1VMu2B7cSJlp-kQGP8wRFZ3k"
+            }
+        });
+        console.log(res.data);
+        console.log("end process");
+        // Access the response data
+    } catch (err) {
+        console.log("error process");
+        console.error(err); // Log errors
+    }
+}
 
-// getProfile();
+getProfile();
 
 
 

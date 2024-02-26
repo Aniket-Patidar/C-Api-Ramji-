@@ -4,7 +4,7 @@ const userModel = require('../module/userSchema');
 const isLoggedIn = require('../middleware/jwt');
 const { use } = require('passport');
 const catchAsyncError = require('../middleware/catchAsyncError');
-
+const ErrorHandler = require('../middleware/ErrorHandler');
 
 
 
