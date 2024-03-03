@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../module/userSchema')
+const userModel = require('../module/userSchema');
 
 const jwt = require("jsonwebtoken");
 const isLoggedIn = require('../middleware/jwt');
@@ -83,6 +84,27 @@ router.get('/logout', catchAsyncError(function (req, res, next) {
         next(err)
     }
 }))
+
+router.post('/forgot', catchAsyncError(async function (req, res, next) {
+    const { contact } = req.body;
+
+    try {
+        const user = await userModel.findOne({ contact });
+
+        if (user) {
+            const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: parseInt(process.env.EXPIRE) });
+
+            res.json({ success: true, token, user })
+
+        } else {
+            return next(new ErrorHandler("please enter correct mobile number", 404));
+        }
+
+    } catch (err) {
+        next(err)
+    }
+}));
+
 
 
 module.exports = router;
