@@ -104,18 +104,25 @@ router.post('/save', isLoggedIn, catchAsyncError(async function (req, res) {
         const user = await userModel.findById(id);
         if (!user) return next(new ErrorHandler("user not found", 404))
 
+        
+
 
 
         let { currentCount, totalCount, malaCount } = req.body;
 
-        currentCount = parseInt(currentCount)
-        totalCount = parseInt(totalCount)
-        malaCount = parseFloat(malaCount)
+        // currentCount = parseInt(currentCount)
+        // totalCount = parseInt(totalCount)
+        // malaCount = parseFloat(malaCount)
+
+        // user.totalCount = totalCount;
+        // user.mala = malaCount;
+        // user.currCount = 0;
 
 
-        user.totalCount = totalCount;
-        user.mala = malaCount;
-        user.currCount = 0;
+        
+       user.totalCount += parseInt(currentCount);
+       user.mala = user.totalCount !== 0 ? (user.totalCount / 108).toFixed(2) : '0.00';
+       user.currCount = 0;
 
         const today = new Date();
 
