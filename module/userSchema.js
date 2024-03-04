@@ -54,6 +54,19 @@ const userSchema = mongoose.Schema({
 });
 
 
+userSchema.pre('save', async function(next) {
+  try {
+    if (this.isNew) {
+      const count = await this.constructor.countDocuments();
+      this.rank = count+1;
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 userSchema.pre('save', async function (next) {
     if (!this.isModified('password')) {
         return next();
